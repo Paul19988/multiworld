@@ -1,11 +1,7 @@
-package me.isaiah.multiworld.command;
+package me.isaiah.multiworld.forge.command;
 
-import java.io.File;
-import java.io.IOException;
-
-import me.isaiah.multiworld.config.FileConfiguration;
 import dimapi.FabricDimensionInternals;
-import net.fabricmc.loader.api.FabricLoader;
+import me.isaiah.multiworld.forge.config.FileConfiguration;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -14,7 +10,9 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.TeleportTarget;
 
-@SuppressWarnings("deprecation") // Fabric dimension API
+import java.io.File;
+import java.io.IOException;
+
 public class SpawnCommand {
 
     public static int run(MinecraftServer mc, ServerPlayerEntity plr, String[] args) {

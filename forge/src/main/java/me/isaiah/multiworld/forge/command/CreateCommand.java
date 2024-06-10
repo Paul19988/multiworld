@@ -1,4 +1,4 @@
-package me.isaiah.multiworld.command;
+package me.isaiah.multiworld.forge.command;
 
 import java.util.Random;
 
@@ -6,7 +6,6 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.LiteralText;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.util.registry.RegistryKey;
 import net.minecraft.util.registry.SimpleRegistry;
@@ -19,7 +18,7 @@ import net.minecraft.world.gen.chunk.ChunkGeneratorSettings;
 //import xyz.nucleoid.fantasy.Fantasy;
 //import xyz.nucleoid.fantasy.RuntimeWorldConfig;
 //import xyz.nucleoid.fantasy.RuntimeWorldHandle;
-import me.isaiah.multiworld.MultiworldMod;
+import me.isaiah.multiworld.forge.MultiworldMod;
 
 public class CreateCommand {
 

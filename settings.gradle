@@ -2,14 +2,13 @@ pluginManagement {
     repositories {
         maven { url "https://maven.fabricmc.net/" }
         maven { url "https://maven.architectury.dev/" }
-        maven { url "https://maven.minecraftforge.net/" }
+        maven { url "https://files.minecraftforge.net/maven/" }
+        maven { url "https://isaiahpatton.github.io/maven-repo/" }
         gradlePluginPortal()
     }
 }
 
-include("common")
-include("fabric")
-//include("fantasy-forge")
-include("forge")
+include "common"
+include "forge"
 
 rootProject.name = "architectury-example-mod"

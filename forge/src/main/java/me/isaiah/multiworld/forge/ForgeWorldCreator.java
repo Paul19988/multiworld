@@ -1,12 +1,9 @@
 package me.isaiah.multiworld.forge;
 
-import me.isaiah.multiworld.ICreator;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.Difficulty;
 import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.util.registry.SimpleRegistry;
 import net.minecraft.server.world.ServerWorld;
 
 import xyz.nucleoid.fantasy.Fantasy;
@@ -14,7 +11,6 @@ import xyz.nucleoid.fantasy.RuntimeWorldConfig;
 import xyz.nucleoid.fantasy.RuntimeWorldHandle;
 
 import net.minecraft.util.Identifier;
-import me.isaiah.multiworld.MultiworldMod;
 
 public class ForgeWorldCreator implements ICreator {
     

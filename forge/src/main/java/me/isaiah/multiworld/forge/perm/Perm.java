@@ -1,4 +1,4 @@
-package me.isaiah.multiworld.perm;
+package me.isaiah.multiworld.forge.perm;
 
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 

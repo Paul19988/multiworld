@@ -1,11 +1,9 @@
-package me.isaiah.multiworld;
+package me.isaiah.multiworld.forge;
 
-import net.minecraft.util.registry.Registry;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
 import net.minecraft.world.Difficulty;
 import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.util.registry.SimpleRegistry;
 import net.minecraft.server.world.ServerWorld;
 
 public interface ICreator {

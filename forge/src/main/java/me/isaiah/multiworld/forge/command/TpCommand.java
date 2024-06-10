@@ -1,4 +1,4 @@
-package me.isaiah.multiworld.command;
+package me.isaiah.multiworld.forge.command;
 
 import java.util.HashMap;
 

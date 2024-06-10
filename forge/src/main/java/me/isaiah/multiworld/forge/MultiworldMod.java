@@ -2,32 +2,16 @@
  * Multiworld Mod
  * Copyright (c) 2021-2022 by Isaiah.
  */
-package me.isaiah.multiworld;
-
-import java.util.function.Supplier;
-import com.mojang.brigadier.CommandDispatcher;
-
-import static com.mojang.brigadier.arguments.StringArgumentType.getString;
-import static com.mojang.brigadier.arguments.StringArgumentType.greedyString;
-import static net.minecraft.server.command.CommandManager.argument;
-import static net.minecraft.server.command.CommandManager.literal;
-
-import java.io.IOException;
+package me.isaiah.multiworld.forge;
 
 import com.mojang.brigadier.Command;
+import com.mojang.brigadier.CommandDispatcher;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-
-import me.isaiah.multiworld.command.CreateCommand;
-import me.isaiah.multiworld.command.SetspawnCommand;
-import me.isaiah.multiworld.command.SpawnCommand;
-import me.isaiah.multiworld.command.TpCommand;
-import me.isaiah.multiworld.perm.Perm;
-import net.minecraft.block.Blocks;
-import net.minecraft.block.Material;
-import net.minecraft.block.NetherPortalBlock;
-import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.block.AbstractBlock.Settings;
-import net.minecraft.block.Block;
+import me.isaiah.multiworld.forge.command.CreateCommand;
+import me.isaiah.multiworld.forge.command.SetspawnCommand;
+import me.isaiah.multiworld.forge.command.SpawnCommand;
+import me.isaiah.multiworld.forge.command.TpCommand;
+import me.isaiah.multiworld.forge.perm.Perm;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
@@ -35,15 +19,15 @@ import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.LiteralText;
 import net.minecraft.text.Text;
 import net.minecraft.util.Formatting;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.registry.Registry;
+import net.minecraft.util.registry.RegistryKey;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.dimension.DimensionType;
 import net.minecraft.world.gen.chunk.ChunkGenerator;
-import net.minecraft.world.Difficulty;
-import net.minecraft.util.registry.RegistryKey;
-import net.minecraft.util.registry.SimpleRegistry;
+
+import static com.mojang.brigadier.arguments.StringArgumentType.getString;
+import static com.mojang.brigadier.arguments.StringArgumentType.greedyString;
+import static net.minecraft.server.command.CommandManager.argument;
+import static net.minecraft.server.command.CommandManager.literal;
 
 /**
  * Multiworld version 1.3
@@ -65,7 +49,7 @@ public class MultiworldMod {
 
     // On mod init
     public static void init() {
-        System.out.println(" Multiworld init");
+        System.out.println("Multiworld init");
     }
 
     // On server start
@@ -108,41 +92,12 @@ public class MultiworldMod {
 
         boolean ALL = Perm.has(plr, "multiworld.admin");
         String[] args = message.split(" ");
-        
-        /*if (args[0].equalsIgnoreCase("portaltest")) {
-            BlockPos pos = plr.getBlockPos();
-            pos = pos.add(2, 0, 2);
-            ServerWorld w = plr.getWorld();
-
-            Portal p = new Portal();
-            for (int x = 0; x < 4; x++) {
-                for (int y = 0; y < 5; y++) {
-                    BlockPos pos2 = pos.add(x, y, 0);
-                    if ((x > 0 && x < 3) && (y > 0 && y < 4)) {
-                        p.blocks.add(pos2);
-                        w.setBlockState(pos2, Blocks.NETHER_PORTAL.getDefaultState());
-                    } else
-                    w.setBlockState(pos2, Blocks.STONE.getDefaultState());
-                }
-            }
-            p.addToMap();
-            try {
-                p.save();
-            } catch (IOException e) {
-                plr.sendMessage(new LiteralText("Failed saving portal data. Check console for details.").formatted(Formatting.RED), false);
-                e.printStackTrace();
-            }
-        }*/
 
         if (args[0].equalsIgnoreCase("setspawn") && (ALL || Perm.has(plr, "multiworld.setspawn") )) {
             return SetspawnCommand.run(mc, plr, args);
-        }
-
-        if (args[0].equalsIgnoreCase("spawn") && (ALL || Perm.has(plr, "multiworld.spawn")) ) {
+        } else if (args[0].equalsIgnoreCase("spawn") && (ALL || Perm.has(plr, "multiworld.spawn")) ) {
             return SpawnCommand.run(mc, plr, args);
-        }
-
-        if (args[0].equalsIgnoreCase("tp") ) {
+        }else if (args[0].equalsIgnoreCase("tp") ) {
             if (!(ALL || Perm.has(plr, "multiworld.tp"))) {
                 plr.sendMessage(Text.of("No permission! Missing permission: multiworld.tp"), false);
                 return 1;
@@ -152,9 +107,7 @@ public class MultiworldMod {
                 return 0;
             }
             return TpCommand.run(mc, plr, args);
-        }
-
-        if (args[0].equalsIgnoreCase("list") ) {
+        } else if (args[0].equalsIgnoreCase("list") ) {
             if (!(ALL || Perm.has(plr, "multiworld.cmd"))) {
                 plr.sendMessage(Text.of("No permission! Missing permission: multiworld.cmd"), false);
                 return 1;
@@ -166,19 +119,19 @@ public class MultiworldMod {
 
                 plr.sendMessage(new LiteralText("- " + name), false);
             });
-        }
-
-        if (args[0].equalsIgnoreCase("version") && (ALL || Perm.has(plr, "multiworld.cmd")) ) {
-            plr.sendMessage(new LiteralText("Mutliworld Mod (Fabric) version 1.2"), false);
+        } else if (args[0].equalsIgnoreCase("version") && (ALL || Perm.has(plr, "multiworld.cmd")) ) {
+            plr.sendMessage(new LiteralText("Multiworld Mod (Forge) version 1.4"), false);
             return 1;
-        }
-
-        if (args[0].equalsIgnoreCase("create") ) {
+        } else if (args[0].equalsIgnoreCase("create") ) {
             if (!(ALL || Perm.has(plr, "multiworld.create"))) {
                 plr.sendMessage(Text.of("No permission! Missing permission: multiworld.create"), false);
                 return 1;
             }
             return CreateCommand.run(mc, plr, args);
+        } else if (args[0].equalsIgnoreCase("mobs")) {
+            boolean mobs = Boolean.getBoolean(args[1]);
+            plr.sendMessage(Text.of("Setting mob spawning to: " + mobs), false);
+            plr.getWorld().setMobSpawnOptions(mobs, mobs);
         }
 
         return Command.SINGLE_SUCCESS; // Success

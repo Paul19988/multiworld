@@ -1,10 +1,6 @@
-package me.isaiah.multiworld.command;
+package me.isaiah.multiworld.forge.command;
 
-import java.io.File;
-import java.io.IOException;
-
-import me.isaiah.multiworld.config.FileConfiguration;
-import net.fabricmc.loader.api.FabricLoader;
+import me.isaiah.multiworld.forge.config.FileConfiguration;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.LiteralText;
@@ -12,6 +8,10 @@ import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fml.loading.FMLPaths;
+
+import java.io.File;
+import java.io.IOException;
 
 public class SetspawnCommand {
 
@@ -30,7 +30,7 @@ public class SetspawnCommand {
     }
 
     public static void setSpawn(World w, BlockPos spawn) throws IOException {
-        File cf = new File(FabricLoader.getInstance().getConfigDir().toFile(), "multiworld"); 
+        File cf = new File(FMLPaths.CONFIGDIR.get().toFile(), "multiworld");
         cf.mkdirs();
 
         File worlds = new File(cf, "worlds");

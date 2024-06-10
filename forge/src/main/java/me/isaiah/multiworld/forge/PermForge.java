@@ -1,10 +1,7 @@
 package me.isaiah.multiworld.forge;
 
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
-
-import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
-import me.isaiah.multiworld.perm.Perm;
+import me.isaiah.multiworld.forge.perm.Perm;
 import net.minecraftforge.fml.OptionalMod;
 
 public class PermForge extends Perm {

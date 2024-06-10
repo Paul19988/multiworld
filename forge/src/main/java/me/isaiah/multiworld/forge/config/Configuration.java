@@ -4,7 +4,7 @@
  * 
  * Unlicense
  */
-package me.isaiah.multiworld.config;
+package me.isaiah.multiworld.forge.config;
 
 import java.io.File;
 import java.io.IOException;

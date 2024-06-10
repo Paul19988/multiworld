@@ -1,4 +1,4 @@
-package me.isaiah.multiworld;
+package me.isaiah.multiworld.forge;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import com.mojang.brigadier.suggestion.SuggestionProvider;
 import com.mojang.brigadier.suggestion.Suggestions;
 import com.mojang.brigadier.suggestion.SuggestionsBuilder;
 
-import me.isaiah.multiworld.perm.Perm;
+import me.isaiah.multiworld.forge.perm.Perm;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.world.World;
